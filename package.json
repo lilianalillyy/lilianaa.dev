@@ -1,0 +1,39 @@
+{
+  "name": "@liliana/lilianaadev",
+  "author": "Mia Vališová <valisova@lilianaa.dev>",
+  "description": "Personal website made in Svelte. https://lilianaa.dev",
+  "private": true,
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "pnpm@8.1.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/rubik": "^5.0.10",
+    "@fontsource/fira-mono": "^5.0.8",
+    "aos": "3.0.0-beta.6",
+    "preact": "^10.16.0",
+    "preact-intersection-observer": "^2.3.6",
+    "react-particles": "^2.12.2",
+    "react-text-transition": "^3.1.0",
+    "tsparticles-basic": "^2.12.0",
+    "tsparticles-engine": "^2.12.0",
+    "tsparticles-interaction-external-trail": "^2.12.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.5.0",
+    "@types/aos": "^3.0.4",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.29",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
+}
