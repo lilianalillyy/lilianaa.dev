@@ -6,7 +6,7 @@ import { Intro } from './sections/Intro';
 export const Index = () => {
     // Is page content shown (after intro background)
     // (TBD - currently unused)
-    const [contentShown, setContentShown] = useState(false);
+    const [_contentShown, setContentShown] = useState(false);
 
     const handleIntroBackgroundShown = (introBackgroundShown: boolean) => {
         let contentInterval: ReturnType<typeof setInterval> | null = null;
