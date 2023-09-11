@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+###> symfony/framework-bundle ###
+.env.local
+.env.local.php
+.env
+.env.*.local
+/catter/config/secrets/prod/prod.decrypt.private.php
+/catter/public/bundles/
+/catter/var/
+vendor/
+###< symfony/framework-bundle ###

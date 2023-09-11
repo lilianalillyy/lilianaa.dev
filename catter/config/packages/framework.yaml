@@ -1,0 +1,54 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    csrf_protection: true
+    http_method_override: false
+    handle_all_throwables: true
+
+    session:
+        handler_id: null
+        cookie_secure: auto
+        cookie_samesite: lax
+        storage_factory_id: session.storage.factory.native
+
+    #esi: true
+    #fragments: true
+    php_errors:
+        log: true
+
+    router:
+        utf8: true
+
+twig:
+    default_path: '%kernel.project_dir%/templates'
+
+when@dev:
+    debug:
+        dump_destination: "tcp://%env(VAR_DUMPER_SERVER)%"
+
+    web_profiler:
+        toolbar: true
+        intercept_redirects: false
+
+    framework:
+        profiler:
+            only_exceptions: false
+            collect_serializer_data: true
+
+when@test:
+    web_profiler:
+        toolbar: false
+        intercept_redirects: false
+
+    framework:
+        profiler: { collect: false }
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file
+
+    twig:
+        strict_variables: true
+
+when@prod:
+    framework:
+        router:
+            strict_requirements: null
