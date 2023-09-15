@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Doctrine;
+namespace App\Doctrine\DQL;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
