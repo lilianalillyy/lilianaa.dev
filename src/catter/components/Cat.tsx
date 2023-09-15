@@ -16,7 +16,7 @@ export const Cat = ({ cat }: CatProps) => <Link key={cat.id} to={`/catter/${cat.
                 <Tag compact tag={cat.cat} />
             </div>
             <div>
-                <p className="text-white font-mono text-xs">{formatDate(new Date())}</p>
+                <p className="text-white font-mono text-xs">{formatDate(new Date(cat.date))}</p>
             </div>
         </div>
     </Image>

@@ -1,0 +1,29 @@
+catter.liliana.digital:443 {
+        encode {
+                gzip 6
+                zstd
+        }
+
+        tls /home/lilianaa.dev/catter/cert.pem /home/lilianaa.dev/catter/priv.pem
+
+        header Accept-Encoding ""
+        header X-XSS-Protection "1; mode=block"
+        header X-Content-Type-Options "nosniff"
+        header Referrer-Policy "no-referrer-when-downgrade"
+        header Permissions-Policy "interest-cohort=()"
+        header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        header X-Frame-Options "sameorigin"
+
+        handle_path /* {
+                root * /home/lilianaa.dev/catter/public
+                php_fastcgi unix//var/run/php/php8.2-fpm.sock {
+                        index /index.php
+                }
+                try_files {path} /index.php
+                file_server
+        }
+}
+
+catter.liliana.digital:80 {
+        redir https://catter.liliana.digital{uri} 301
+}

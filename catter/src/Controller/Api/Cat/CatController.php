@@ -5,7 +5,6 @@ namespace App\Controller\Api\Cat;
 use App\Controller\Api\ApiController;
 use App\Entity\Cat\Cat;
 use App\Entity\Cat\CatRepository;
-use Doctrine\ORM\NoResultException;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,7 +29,8 @@ class CatController extends ApiController
         $qb = $this->cats
             ->createQueryBuilder('c')
             ->setFirstResult(($page - 1) * self::MaxPerPage)
-            ->setMaxResults(self::MaxPerPage);
+            ->setMaxResults(self::MaxPerPage)
+            ->orderBy('c.date', 'DESC');
 
         if (!empty($catTags = $this->createIntArray($catTags))) {
             $qb

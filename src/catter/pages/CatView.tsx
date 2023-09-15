@@ -115,7 +115,7 @@ export const CatView = ({ onClose, catId, transitionTimeout = 300 }: CatViewProp
                                                         <div className="flex justify-between items-end">
                                                             <p className="text-xs font-mono">
                                                                 {/** TODO */}
-                                                                {formatDate(new Date())}
+                                                                {formatDate(new Date(cat.date))}
                                                             </p>
 
                                                             <Tag tag={cat.camera} color="secondary" compact />

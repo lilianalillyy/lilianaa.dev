@@ -29,6 +29,7 @@ export interface Cat {
     content: string | null;
     camera: Tag<TagType.CameraTag>;
     tags: Tag<TagType.ContentTag>[];
+    date: string;
 }
 
 export type CatListResponse = Response<{

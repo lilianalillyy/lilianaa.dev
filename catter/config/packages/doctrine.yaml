@@ -18,7 +18,7 @@ doctrine:
                 alias: App
         dql:
             string_functions:
-                RAND: App\Doctrine\RandFunction
+                RAND: App\Doctrine\DQL\RandFunction
 
 doctrine_migrations:
     migrations_paths:

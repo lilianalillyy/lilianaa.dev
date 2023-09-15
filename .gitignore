@@ -34,3 +34,6 @@ dist-ssr
 /catter/var/
 vendor/
 ###< symfony/framework-bundle ###
+
+cert.pem
+priv.pem

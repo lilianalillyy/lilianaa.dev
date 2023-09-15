@@ -2,6 +2,7 @@
 
 namespace App\Entity\Cat;
 
+use App\Doctrine\Traits\WithDate;
 use App\Entity\Cat\CatRepository;
 use App\Entity\Tag\Tag;
 use App\Entity\Tag\TagType;
@@ -11,8 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 use RuntimeException;
 
 #[ORM\Entity(repositoryClass: CatRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Cat
 {
+    use WithDate;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -104,7 +108,7 @@ class Cat
     public function setImage(string $image): void
     {
         $this->image = $image;
-    } 
+    }
 
     public function getContent(): ?string
     {
@@ -114,7 +118,7 @@ class Cat
     public function setContent(?string $content): void
     {
         $this->content = $content;
-    } 
+    }
 
     public function toArray(): array
     {
@@ -123,8 +127,9 @@ class Cat
             "image_url" => $this->getImage() ? ("/cats/" . $this->getImage()) : "/404.jpg",
             "cat" => $this->getCatTag()->toArray(),
             "content" => $this->getContent(),
+            "date" => $this->getDate(),
             "camera" => $this->getCameraTag()->toArray(),
-            "tags" => array_map(fn (Tag $tag) => $tag->toArray(), $this->getTags()),
+            "tags" => array_map(fn(Tag $tag) => $tag->toArray(), $this->getTags()),
         ];
     }
 
