@@ -1,6 +1,6 @@
 import { render } from 'preact';
 import AOS from "aos";
-import { ReactRoot } from './components/ReactRoot.tsx';
+import { ReactRoot } from './ReactRoot.tsx';
 
 import '@fontsource/fira-mono';
 import '@fontsource-variable/rubik';

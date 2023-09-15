@@ -2,7 +2,15 @@
 
 Production: https://catter.liliana.digital
 
-Endpoints:
-- GET /api/cat
+## Endpoints:
+
+### Cat
+
+- GET /api/cat(?page=int)
 - GET /api/cat/{id}
-- GET /api/cat/tags
+
+### Tag
+
+- GET /api/tag(?type=camera_tag|cat_tag|content_tag)
+- GET /api/tag/{id}
+- GET /api/tag/types

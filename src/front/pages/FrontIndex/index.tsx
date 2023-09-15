@@ -1,9 +1,7 @@
 import { useState } from 'preact/hooks';
-//import { Navbar } from './layout/Navbar';
 import { Intro } from './sections/Intro';
 
-
-export const Index = () => {
+export const FrontIndex = () => {
     // Is page content shown (after intro background)
     // (TBD - currently unused)
     const [_contentShown, setContentShown] = useState(false);
@@ -24,8 +22,6 @@ export const Index = () => {
 
     return (
         <>
-            {/*contentShown && <Navbar />*/}
-
             <Intro onIntroBackgroundShown={handleIntroBackgroundShown} />
         </>
     )
