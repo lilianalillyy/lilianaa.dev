@@ -27,6 +27,7 @@ export interface Cat {
     image_url: string;
     cat: Tag<TagType.CatTag>;
     content: string | null;
+    page_title: string | null
     camera: Tag<TagType.CameraTag>;
     tags: Tag<TagType.ContentTag>[];
     date: string;

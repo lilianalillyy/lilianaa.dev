@@ -1,16 +1,17 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { useEffect, useState } from "preact/hooks";
 import { Fragment } from "preact/jsx-runtime";
-import { useCat } from "../api/hooks";
+import { useCat } from "../hooks/api";
 import { Loading } from "../../components/ui/Loading";
 import { Image } from "../../components/ui/Image";
 import { endpoint } from "../api";
-import { TagContainer } from "../components/TagContainer";
-import { Tag } from "../components/Tag";
+import { TagContainer } from "./TagContainer";
+import { Tag } from "./Tag";
 import { XIcon } from "../../components/icons/XIcon";
 import { c, formatDate } from "../../utils";
 import { useLg } from "../../hooks/useLg";
 import { PawIcon } from "../../components/icons/PawIcon";
+import { useTitle } from "../../hooks/useTitle";
 
 export interface CatViewProps {
     catId: number;
@@ -24,6 +25,8 @@ export const CatView = ({ onClose, catId, transitionTimeout = 300 }: CatViewProp
     const [shown, setShown] = useState(true);
 
     const lg = useLg();
+
+    useTitle(cat?.page_title ? cat.page_title : "", "Catter")
 
     useEffect(() => {
         const timeout = setTimeout(() => setShown(true), 0);

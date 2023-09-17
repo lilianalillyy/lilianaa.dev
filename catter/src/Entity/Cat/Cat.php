@@ -127,6 +127,7 @@ class Cat
             "image_url" => $this->getImage() ? ("/cats/" . $this->getImage()) : "/404.jpg",
             "cat" => $this->getCatTag()->toArray(),
             "content" => $this->getContent(),
+            "page_title" => ($this->getContent() ? substr(strip_tags($this->getContent()), 0, 24) : $this->getCatTag()?->getContent()) ?? "",
             "date" => $this->getDate(),
             "camera" => $this->getCameraTag()->toArray(),
             "tags" => array_map(fn(Tag $tag) => $tag->toArray(), $this->getTags()),

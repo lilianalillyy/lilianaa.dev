@@ -1,10 +1,10 @@
-import { nickname } from "../../../utils/constants"
-import { Tag, TagType } from "../../../catter/api/types"
-import { useTags } from "../../../catter/api/hooks";
-import { Loading } from "../../../components/ui/Loading";
+import { nickname } from "../../utils/constants"
+import { Tag, TagType } from "../../catter/api/types"
+import { useTags } from "../../catter/hooks/api";
+import { Loading } from "../../components/ui/Loading";
 import { useState } from "preact/hooks";
-import { RandomCatView } from "../../components/RandomCatView";
-import { Gateway } from "../../components/Gateway";
+import { RandomCatView } from "../../catter/components/RandomCatView";
+import { Gateway } from "../../front/components/Gateway";
 
 // i was procrastinating
 export const CatSentence = () => {

@@ -3,6 +3,7 @@
 namespace App\Controller\Api\Tag;
 
 use App\Controller\Api\ApiController;
+use App\Entity\Tag\Tag;
 use App\Entity\Tag\TagRepository;
 use App\Entity\Tag\TagType;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
@@ -29,7 +30,7 @@ class TagController extends ApiController {
         $tags = $this->tags->findBy($type ? ["type" => $type] : []);
 
         return $this->ok([
-            "tags" => $tags
+            "tags" => array_map(fn (Tag $tag) => $tag->toArray(), $tags),
         ]);
     }
 
@@ -40,7 +41,7 @@ class TagController extends ApiController {
         }
 
         return $this->ok([
-            "tag" => $tag
+            "tag" => $tag->toArray(),
         ]);
     }
 

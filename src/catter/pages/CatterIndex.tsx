@@ -1,5 +1,5 @@
 import { useMemo, useState } from "preact/hooks";
-import { useCats, useTags } from "../api/hooks";
+import { useCats, useTags } from "../hooks/api";
 import { Tag as ApiTag, TagType } from "../api/types";
 import { Tag } from "../components/Tag";
 import { TagContainer } from "../components/TagContainer";
@@ -7,10 +7,11 @@ import { SectionContainer } from "../components/SectionContainer";
 import { Loading } from "../../components/ui/Loading";
 import { Link, useNavigate } from "react-router-dom";
 import { useNumberId } from "../../hooks/useNumberId";
-import { CatView } from "./CatView";
+import { CatView } from "../components/CatView";
 import { Cat } from "../components/Cat";
+import { useTitle } from "../../hooks/useTitle";
 
-export const CatList = () => {
+export const CatterIndex = () => {
     const catId = useNumberId();
     const navigate = useNavigate();
 
@@ -59,6 +60,8 @@ export const CatList = () => {
     };
 
     const { data: cats = [], isLoading: catsLoading } = useCats(1, selectedCatTags, selectedCameraTags, selectedContentTags);
+
+    useTitle("", "Catter");
 
     return (
         <>

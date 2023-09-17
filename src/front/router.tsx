@@ -3,7 +3,7 @@ import { FrontIndex } from "./pages/FrontIndex";
 import { lazy } from "preact/compat";
 import { LoadingSuspense } from "../components/ui/LoadingSuspense";
 
-export const CatSentence = lazy(() => import("./pages/science/CatSentence").then(val => val.CatSentence));
+export const CatSentence = lazy(() => import("../science/pages/CatSentence").then(val => val.CatSentence));
 
 export const FrontRouter = () => (
     <Routes>

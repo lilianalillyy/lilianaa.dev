@@ -1,6 +1,6 @@
 import useSWR from "swr";
-import { getCat, getCats, getRandomCat, getTag, getTags } from ".";
-import { TagType } from "./types";
+import { getCat, getCats, getRandomCat, getTag, getTags } from "../api";
+import { TagType } from "../api/types";
 
 export const useCats = (
     page: number = 1,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
-import { CatView } from "../../catter/pages/CatView";
-import { getRandomCat } from "../../catter/api";
+import { CatView } from "./CatView";
+import { getRandomCat } from "../api";
 import { toast } from "../../utils/toast";
 
 export interface RandomCatViewProps {

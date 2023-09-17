@@ -5,4 +5,4 @@ export const c = (...values: (string | (string[]) | JSX.SignalLike<string | unde
     .map(v => typeof v === "string" ? v : Array.isArray(v) ? v.join(" ") : String(v))
     .join(" ")
 
-export const formatDate = (date: Date) => `${date.getDate()}/${date.getMonth() + 1}/${String(date.getFullYear()).slice(2)}`
+export const formatDate = (date: Date) => `${date.getDate()}/${date.getMonth() + 1}/${String(date.getFullYear()).slice(2)}`;

@@ -2,13 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import { LoadingSuspense } from "../components/ui/LoadingSuspense";
 import { lazy } from "preact/compat";
 
-const CatterIndex = lazy(() => import("./pages/CatterIndex").then(val => val.CatterIndex));
+const CatSentence = lazy(() => import("./pages/CatSentence").then(val => val.CatSentence));
 
-export const CatterRouter = () => {
+export const ScienceRouter = () => {
     return (
         <Routes>
-            <Route path="/catter/:id?" element={<LoadingSuspense>
-                <CatterIndex />
+            <Route path="/_science/cat-sentence" element={<LoadingSuspense>
+                <CatSentence />
             </LoadingSuspense>} />
         </Routes>
     )

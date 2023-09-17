@@ -1,7 +1,10 @@
 import { useState } from 'preact/hooks';
 import { Intro } from './sections/Intro';
+import { useTitle } from '../../../hooks/useTitle';
 
 export const FrontIndex = () => {
+    useTitle();
+    
     // Is page content shown (after intro background)
     // (TBD - currently unused)
     const [_contentShown, setContentShown] = useState(false);

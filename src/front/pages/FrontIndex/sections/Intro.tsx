@@ -10,7 +10,7 @@ import { dots } from "../../../../utils/particles";
 import { c } from "../../../../utils";
 import { Link } from "react-router-dom";
 import { PawIcon } from "../../../../components/icons/PawIcon";
-import { RandomCatView } from "../../../components/RandomCatView";
+import { RandomCatView } from "../../../../catter/components/RandomCatView";
 import { useMd } from "../../../../hooks/useMd";
 
 export const IntroSubtitle = () => {
