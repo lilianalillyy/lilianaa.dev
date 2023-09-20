@@ -1,6 +1,6 @@
 export const linkedInUrl = "https://www.linkedin.com/in/mia-vali%C5%A1ov%C3%A1-536a421b8/";
 
-export const nickname = "Liliiana";
+export const nickname = "Liliana";
 
 export const firstName = "Mia";
 
