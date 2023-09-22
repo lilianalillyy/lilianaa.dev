@@ -48,11 +48,21 @@ export const CatView = ({ onClose, catId, transitionTimeout = 300 }: CatViewProp
     }
 
     const Header = () => (
-        <div className={c("flex gap-4", cat ? "justify-between" : "justify-end", lg ? "pb-6" : "py-4 px-3")}>
-            {cat && (lg ? <Tag tag={cat.cat} color="secondary" /> : <div className="text-xs font-mono inline-flex items-center gap-2">
-                <PawIcon className="w-4 h-4" />
-                <span>{cat.cat.content}</span>
-            </div>)}
+        <div className={c("flex gap-4 items-start", cat ? "justify-between" : "justify-end", lg ? "pb-6" : "py-4 px-3")}>
+            {cat && (lg ? (
+                <div className={"inline-flex flex-col items-start gap-2"}>
+                    {cat.cat_tags.length && (
+                        cat.cat_tags.map(tag => <Tag className="w-fit" key={tag.id} color="secondary" compact tag={tag} />)
+                    )}
+                </div>
+            ) : (
+                <div className="text-xs font-mono inline-flex items-center gap-2">
+                    <PawIcon className="w-4 h-4" />
+                    <div>
+                        {cat.cat_tags.map(tag => <div>{tag.content}</div>)}
+                    </div>
+                </div>
+            ))}
             <button onClick={handleClose} className="text-slate-500 hover:text-black transition duration-300 ease-in-out-cubic">
                 <XIcon className={lg ? "w-6 h-6" : "w-4 h-4"} />
             </button>
@@ -121,7 +131,7 @@ export const CatView = ({ onClose, catId, transitionTimeout = 300 }: CatViewProp
                                                                 {formatDate(new Date(cat.date))}
                                                             </p>
 
-                                                            <Tag tag={cat.camera} color="secondary" compact />
+                                                            <Tag tag={cat.camera_tag} color="secondary" compact />
                                                         </div>
                                                     </div>
                                                 </>

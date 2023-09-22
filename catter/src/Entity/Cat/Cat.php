@@ -32,7 +32,7 @@ class Cat
     /**
      * @return Collection<int, Tag>
      */
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'cats')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'taggedCats')]
     #[ORM\JoinTable(name: 'cat_content_tags')]
     private ?Collection $tags = null;
 
@@ -40,9 +40,12 @@ class Cat
     #[ORM\JoinColumn(name: 'cat_camera_tag', referencedColumnName: 'id')]
     private ?Tag $cameraTag = null;
 
-    #[ORM\ManyToOne(targetEntity: Tag::class)]
-    #[ORM\JoinColumn(name: 'cat_tag', referencedColumnName: 'id')]
-    private ?Tag $catTag = null;
+    /**
+     * @return Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'cats')]
+    #[ORM\JoinTable(name: 'cat_tag')]
+    private ?Collection $catTags = null;
 
     public function getId(): ?int
     {
@@ -64,15 +67,7 @@ class Cat
      */
     public function setTags(array|Collection $tags): void
     {
-        foreach ($tags as $tag) {
-            if (!($tag instanceof Tag)) {
-                throw new RuntimeException("Array contains non-Tag items");
-            }
-
-            if ($tag->getType() !== TagType::ContentTag) {
-                throw new RuntimeException("Attempting to pass non-content tags to Cat::tags");
-            }
-        }
+        $this->validateTagCollection($tags, TagType::ContentTag);
 
         $this->tags = $tags instanceof Collection ? $tags : new ArrayCollection($tags);
     }
@@ -91,18 +86,16 @@ class Cat
         $this->cameraTag = $cameraTag;
     }
 
-    public function getCatTag(): ?Tag
+    public function getCatTags(): ?Collection
     {
-        return $this->catTag;
+        return $this->catTags;
     }
 
-    public function setCatTag(Tag $catTag): void
+    public function setCatTags(array|Collection $catTags): void
     {
-        if ($catTag->getType() !== TagType::CatTag) {
-            throw new RuntimeException("Attempting to use a non-cat tag for Cat::catTag");
-        }
+        $this->validateTagCollection($catTags, TagType::CatTag);
 
-        $this->catTag = $catTag;
+        $this->catTags = $catTags instanceof Collection ? $catTags : new ArrayCollection($catTags);
     }
 
     public function setImage(string $image): void
@@ -120,20 +113,35 @@ class Cat
         $this->content = $content;
     }
 
+    private function validateTagCollection(array|Collection $tags, TagType $type): void
+    {
+        foreach ($tags as $tag) {
+            if (!($tag instanceof Tag)) {
+                throw new RuntimeException("Array or Collection contains non-Tag items");
+            }
+
+            if ($tag->getType() !== $type) {
+                throw new RuntimeException(sprintf("Attempting to pass Tag of type %s while expecting type %s", $tag->getType(), $type));
+            }
+        }
+    }
+
     public function toArray(): array
     {
+        $catTags = $this->getCatTags()->toArray();
         return [
             "id" => $this->getId(),
             "image_url" => $this->getImage() ? ("/cats/" . $this->getImage()) : "/404.jpg",
-            "cat" => $this->getCatTag()->toArray(),
+            "cat_tags" => array_map(fn(Tag $tag) => $tag->toArray(), $catTags),
             "content" => $this->getContent(),
-            "page_title" => (
-                ($content = $this->getContent())
-                ? (substr(strip_tags($content), 0, 30) . (strlen($content > 30 ? "..." : "")))
-                : $this->getCatTag()?->getContent()
-            ) ?? "",
+            "page_title" => 
+                substr(
+                    strip_tags(
+                        $content = ($this->getContent() ?? implode(", ", array_map(fn(Tag $tag) => $tag->getContent(), $catTags)))
+                    ), 0, 30
+                ) . strlen($content > 30 && $this->getContent() ? "..." : ""),
             "date" => $this->getDate(),
-            "camera" => $this->getCameraTag()->toArray(),
+            "camera_tag" => $this->getCameraTag()->toArray(),
             "tags" => array_map(fn(Tag $tag) => $tag->toArray(), $this->getTags()),
         ];
     }

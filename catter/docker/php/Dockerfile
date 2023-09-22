@@ -30,4 +30,4 @@ RUN install-php-extensions @composer
 FROM base AS prod
 
 RUN docker-php-ext-install opcache && docker-php-ext-enable opcache
-COPY . /home/odry
+COPY . /home/fakturing

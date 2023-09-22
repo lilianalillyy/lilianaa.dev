@@ -23,11 +23,17 @@ class Tag
     private ?string $content = null;
 
     /**
-     * Many Groups have Many Users.
      * @var Collection<int, Cat>
      */
     #[ORM\ManyToMany(targetEntity: Cat::class, mappedBy: 'tags')]
-    private Collection $users;
+    private Collection $taggedCats;
+
+    /**
+     * For CatTags only
+     * @var Collection<int, Cat>
+     */
+    #[ORM\ManyToMany(targetEntity: Cat::class, mappedBy: 'catTags')]
+    private Collection $cats;
 
     public function getId(): ?int
     {
@@ -52,6 +58,16 @@ class Tag
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function getTaggedCats(): Collection
+    {
+        return $this->taggedCats;
+    }
+
+    public function getCats(): Collection
+    {
+        return $this->cats;
     }
 
     public function __toString(): string

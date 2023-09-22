@@ -22,7 +22,6 @@ class TagCrudController extends AbstractCrudController
         return Tag::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [

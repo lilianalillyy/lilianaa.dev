@@ -4,7 +4,7 @@ import { useTags } from "../../catter/hooks/api";
 import { Loading } from "../../components/ui/Loading";
 import { useState } from "preact/hooks";
 import { RandomCatView } from "../../catter/components/RandomCatView";
-import { Gateway } from "../../front/components/Gateway";
+import { Gateway } from "../../components/Gateway";
 
 // i was procrastinating
 export const CatSentence = () => {
@@ -20,15 +20,19 @@ export const CatSentence = () => {
                 Hi, I am {nickname} and I {catTags.length ? (
                     <>
                         have {catTags.length} {catTags.length > 1 ? "cats" : "cat"} &ndash;{" "}
-                        {/**
-                           *  yes, we are all aware of Intl.ListFormat which can concat strings in a sentence, 
-                           * however this can't be used with JSX but only strings, so this hack-a-voodoo will have to do,
-                           * at least for now. 
-                           */}
-                        {catTags.slice(0, -1).map((tag, i) => <>
-                            <CatButton key={tag.id} tag={tag} />
-                            {i !== catTags.length - 2 && ","}
-                        </>)} and <CatButton tag={catTags[catTags.length - 1]} />
+                        {catTags.length && (catTags.length === 1 ? <CatButton tag={catTags[0]} /> : (
+                            <>
+                                {/**
+                                  *  yes, we are all aware of Intl.ListFormat which can concat strings in a sentence, 
+                                  * however this can't be used with JSX but only strings, so this hack-a-voodoo will have to do,
+                                  * at least for now. 
+                                  */}
+                                {catTags.slice(0, -1).map((tag, i) => <>
+                                    <CatButton key={tag.id} tag={tag} />
+                                    {i !== catTags.length - 2 && ", "}
+                                </>)} and <CatButton tag={catTags[catTags.length - 1]} />
+                            </>
+                        ))}
                     </>
                 ) : "don't have any cats"}
             </>}

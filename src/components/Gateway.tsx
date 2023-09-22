@@ -1,5 +1,5 @@
 import { PropsWithChildren, useState } from "preact/compat"
-import { toast } from "../../utils/toast";
+import { toast } from "../utils/toast";
 
 export interface GatewayProps {
     password?: string;

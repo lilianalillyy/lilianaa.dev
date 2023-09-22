@@ -34,8 +34,8 @@ class CatController extends ApiController
 
         if (!empty($catTags = $this->createIntArray($catTags))) {
             $qb
-                ->join('c.catTag', 'cat')
-                ->andWhere('cat.id IN (:catTags)')
+                ->join('c.catTags', 'catTags')
+                ->andWhere('catTags.id IN (:catTags)')
                 ->setParameter('catTags', $catTags);
         }
 
@@ -68,10 +68,12 @@ class CatController extends ApiController
             ->addOrderBy('RAND()')
             ->setMaxResults(1);
 
-        if ($catTagId) {
-            $qb->where("c.catTag = :catTagId")
-                ->setParameter("catTagId", $catTagId);
-        }
+            if (!empty($catTagId)) {
+                $qb
+                    ->join('c.catTags', 'catTags')
+                    ->andWhere('catTags.id = :catTagId')
+                    ->setParameter('catTagId', $catTagId);
+            }
 
         $cat = $qb->getQuery()
             ->getOneOrNullResult();

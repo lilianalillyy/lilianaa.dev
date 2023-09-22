@@ -25,10 +25,10 @@ export interface Tag<T extends TagType = TagType> {
 export interface Cat {
     id: number;
     image_url: string;
-    cat: Tag<TagType.CatTag>;
+    cat_tags: Tag<TagType.CatTag>[];
     content: string | null;
     page_title: string | null
-    camera: Tag<TagType.CameraTag>;
+    camera_tag: Tag<TagType.CameraTag>;
     tags: Tag<TagType.ContentTag>[];
     date: string;
 }

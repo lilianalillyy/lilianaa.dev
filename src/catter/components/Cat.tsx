@@ -10,10 +10,12 @@ export interface CatProps {
 }
 
 export const Cat = ({ cat }: CatProps) => <Link key={cat.id} to={`/catter/${cat.id}`}>
-    <Image containerClassName="h-96" className="h-full w-full object-cover" src={endpoint(cat.image_url)} alt={cat.cat.content}>
-        <div className="absolute inset-0 p-4 flex flex-col md:flex-row md:justify-between items-end opacity-50 hover:opacity-100 transition duration-300 ease-in-out">
-            <div>
-                <Tag compact tag={cat.cat} />
+    <Image containerClassName="h-96" className="h-full w-full object-cover" src={endpoint(cat.image_url)} alt={cat.page_title ?? ""}>
+        <div className="absolute inset-0 p-4 flex flex-col gap-4 md:flex-row md:justify-between items-end opacity-50 hover:opacity-100 transition duration-300 ease-in-out">
+            <div className={"inline-flex flex-col items-end md:items-start gap-2"}>
+                {cat.cat_tags.length && (
+                    cat.cat_tags.map(tag => <Tag className="w-fit" key={tag.id} compact tag={tag} />)
+                )}
             </div>
             <div>
                 <p className="text-white font-mono text-xs">{formatDate(new Date(cat.date))}</p>

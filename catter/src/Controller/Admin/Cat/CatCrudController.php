@@ -25,12 +25,12 @@ class CatCrudController extends AbstractCrudController
         return Cat::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideWhenCreating()->setDisabled(),
             ImageField::new('image')
+                ->hideWhenUpdating()
                 ->setUploadDir("public/cats/")
                 ->setBasePath("cats/")
                 ->setUploadedFileNamePattern('cat_[year]_[month]_[day]-[contenthash].[extension]'),
@@ -41,12 +41,16 @@ class CatCrudController extends AbstractCrudController
                 ->setQueryBuilder(
                     fn(QueryBuilder $qb) => $qb->where("entity.type = ?0")->setParameters([TagType::ContentTag->value])
                 ),
-            AssociationField::new('catTag')
+            AssociationField::new('catTags')
+                ->hideOnIndex()
+                ->setRequired(true)
                 ->setQueryBuilder(
                     fn(QueryBuilder $qb) => $qb->where("entity.type = ?0")->setParameters([TagType::CatTag->value])
                 )
+                //->formatValue(fn ($val) => dd($val))
                 ->setRequired(true),
             AssociationField::new('cameraTag')
+                ->hideOnIndex()
                 ->setQueryBuilder(
                     fn(QueryBuilder $qb) => $qb->where("entity.type = ?0")->setParameters([TagType::CameraTag->value])
                 )
