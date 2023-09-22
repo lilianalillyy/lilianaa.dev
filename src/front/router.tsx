@@ -8,9 +8,5 @@ export const CatSentence = lazy(() => import("../science/pages/CatSentence").the
 export const FrontRouter = () => (
     <Routes>
         <Route path="/" element={<FrontIndex />} />
-
-        <Route path="/_science/cat-sentence" element={<LoadingSuspense>
-            <CatSentence />
-        </LoadingSuspense>} />
     </Routes>
 )
