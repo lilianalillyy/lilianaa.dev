@@ -3,18 +3,21 @@
 namespace App\Entity\Cat;
 
 use App\Doctrine\Traits\WithDate;
-use App\Entity\Cat\CatRepository;
 use App\Entity\Tag\Tag;
 use App\Entity\Tag\TagType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use RuntimeException;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 
 #[ORM\Entity(repositoryClass: CatRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Cat
 {
+    public const PublicDir = "/cats";
+
     use WithDate;
 
     #[ORM\Id]
@@ -25,6 +28,10 @@ class Cat
     #[ORM\Column(nullable: false)]
 
     private ?string $image = null;
+
+    #[ORM\Column(nullable: true)]
+
+    private ?string $thumbnail = null;
 
     #[ORM\Column(nullable: true)]
     private ?string $content = null;
@@ -55,6 +62,11 @@ class Cat
     public function getImage(): ?string
     {
         return $this->image;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
     }
 
     public function getTags(): array
@@ -99,8 +111,26 @@ class Cat
     }
 
     public function setImage(string $image): void
-    {
+    {;
+        if ($this->image && $this->image !== $image) {
+            $this->removeImageFile($image);
+            $this->setThumbnail(null);
+        }
+
         $this->image = $image;
+
+    }
+
+    /**
+     * @param string|null $thumbnail
+     */
+    public function setThumbnail(/* string */?string $thumbnail): void
+    {
+        if ($this->thumbnail && $this->thumbnail !== $thumbnail) {
+            $this->removeImageFile($this->thumbnail);
+        }
+
+        $this->thumbnail = $thumbnail;
     }
 
     public function getContent(): ?string
@@ -121,17 +151,29 @@ class Cat
             }
 
             if ($tag->getType() !== $type) {
-                throw new RuntimeException(sprintf("Attempting to pass Tag of type %s while expecting type %s", $tag->getType(), $type));
+                throw new RuntimeException(sprintf("Attempting to pass Tag of type %s while expecting type %s", $tag->getType()->value, $type->value));
             }
         }
+    }
+
+    private function removeImageFile(string $file): void
+    {
+        $file = realpath(sprintf("%s/../../../public%s/%s", __DIR__, self::PublicDir, $file));
+        try {
+            if ($file) {
+                (new Filesystem())->remove($file);
+            }
+        } catch (IOException) {}
     }
 
     public function toArray(): array
     {
         $catTags = $this->getCatTags()->toArray();
+
         return [
             "id" => $this->getId(),
             "image_url" => $this->getImage() ? ("/cats/" . $this->getImage()) : "/404.jpg",
+            "thumbnail_url" => $this->getThumbnail() ? ("/cats/" . $this->getThumbnail()) : null,
             "cat_tags" => array_map(fn(Tag $tag) => $tag->toArray(), $catTags),
             "content" => $this->getContent(),
             "page_title" => 
