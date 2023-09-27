@@ -24,10 +24,9 @@ class CatController extends ApiController
     #[MapQueryParameter] array $cameraTags = [],
     #[MapQueryParameter] array $contentTags = []
     ) {
-        $page = (int) ($page < 1 ? 1 : $page);
+        $page = max($page, 1);
 
-        $qb = $this->cats
-            ->createQueryBuilder('c')
+        $qb = $this->cats->createQueryBuilder('c')
             ->setFirstResult(($page - 1) * self::MaxPerPage)
             ->setMaxResults(self::MaxPerPage)
             ->orderBy('c.date', 'DESC');

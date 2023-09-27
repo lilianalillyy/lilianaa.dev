@@ -10,3 +10,6 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Kernel.php'
+
+    App\EventListener\CatPersistListener:
+        tags: [kernel.event_listener]

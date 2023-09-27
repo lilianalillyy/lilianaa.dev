@@ -7,21 +7,17 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 
 # Update system, kernel, required dependencies and add bash because sh sucks.
 RUN apk update && \
-    apk add libxrender libxext gcompat fontconfig libstdc++ libpng-dev libjpeg libjpeg-turbo-dev && \
+    apk add libxrender libxext gcompat fontconfig libstdc++ libpng-dev libjpeg libjpeg-turbo-dev imagemagick-dev && \
     apk add --no-cache bash linux-headers $PHPIZE_DEPS
 
 # Install PHP Extensions
-RUN install-php-extensions mysqli pdo_mysql gd exif intl @composer
+RUN install-php-extensions mysqli pdo_mysql gd exif intl
 
-# Wkhtmltopdf
-RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-RUN tar vxf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
-RUN cp wkhtmltox/bin/wk* /usr/local/bin/
-RUN rm -rf wkhtmltox
 
 FROM base AS dev
 # Install dev-specific dependencies
 RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN pecl install imagick && docker-php-ext-enable imagick
 
 # Copy Composer for localhost use
 RUN install-php-extensions @composer
