@@ -1,4 +1,5 @@
-const { createWriteStream, rmSync } = require("fs");
+const { createWriteStream } = require("fs");
+const { rm } = require("fs/promises");
 
 module.exports.streamToFile = (stream, outputFile) => {
     return new Promise((resolve, reject) => {
@@ -14,10 +15,10 @@ module.exports.streamToFile = (stream, outputFile) => {
     });
 }
 
-module.exports.cleanupTemp = (zip, dir) => {
+module.exports.cleanupTemp = async (zip, dir) => {
     try {
-        zip && rmSync(zip)
-        dir && rmSync(dir, { recursive: true });
+        zip && await rm(zip)
+        dir && await rm(dir, { recursive: true });
     } catch {
         return;
     }
