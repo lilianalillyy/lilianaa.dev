@@ -21,7 +21,7 @@ export const IntroSubtitle = () => {
     const [rayEasterEggOpen, setRayEasterEggOpen] = useState(false);
 
     useEffect(() => {
-        const subtitleIndexInterval = setInterval(() => setSubtitleIndex((index) => index + 1), 1500);
+        const subtitleIndexInterval = setInterval(() => setSubtitleIndex((index) => index + 1), 3000);
 
         return () => {
             clearInterval(subtitleIndexInterval);
@@ -34,17 +34,11 @@ export const IntroSubtitle = () => {
 
     return (
         <>
-            <button className="cursor-text" onClick={handleClick}>
-                <TextTransition
-                    springConfig={{
-                        tension: 180,
-                        friction: 12
-                    }}
-                    className="text-white text-xl md:text-3xl first-upper tracking-wider font-semibold font-mono underline decoration-4"
-                >
+            <div class={"text-4xl font-extralight"} onClick={handleClick}>
+                <TextTransition inline direction={"down"}>
                     {text}
                 </TextTransition>
-            </button>
+            </div>
 
             {rayEasterEggOpen && <RandomCatView catTagId={rayCatTagId} onClose={() => setRayEasterEggOpen(false)} />}
         </>

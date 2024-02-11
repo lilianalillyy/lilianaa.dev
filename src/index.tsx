@@ -1,16 +1,10 @@
 import { render } from 'preact';
-import AOS from "aos";
 import { ReactRoot } from './ReactRoot.tsx';
 
-import '@fontsource/fira-mono';
-import '@fontsource-variable/rubik';
+import "@fontsource/manrope";
+import "@fontsource/manrope/200.css";
 
 import './assets/app.css';
 import 'aos/dist/aos.css';
-
-AOS.init({
-    easing: "ease-in-out-cubic",
-    duration: 500,
-});
 
 render(<ReactRoot />, document.getElementById('app')!)
