@@ -1,4 +1,6 @@
-export const linkedInUrl = "https://www.linkedin.com/in/valisovam/";
+export const linkedInPartialUrl = "/in/valisovam";
+
+export const linkedInUrl = `https://www.linkedin.com${linkedInPartialUrl}/`
 
 export const nickname = "Liliana";
 
@@ -10,11 +12,11 @@ export const fullName = `${firstName} ${lastName}`;
 
 export const github = "lilianalillyy";
 
-export const mail = "valisova@lilianaa.dev";
+export const mail = "pilchova@lilianaa.dev";
 
-export const rayEasterEgg = "☕";
+export const rayEasterEgg = "🥯";
 
-export const rayCatTagId = 3;
+export const rayCatTagId = 2;
 
 export const subtitles = [
     "Full-stack Developer",
