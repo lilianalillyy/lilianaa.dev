@@ -49,14 +49,18 @@ export interface DataAosOptions {
   anchorPlacement?: AnchorPlacement;
 }
 
-export const aos = ({ animation, ...opts }: DataAosOptions = {}) => {
-  const props: Record<string, string> = {};
+export const aos = (aosOptionsOrAnimation: DataAosOptions|Animation = {}) => {
 
-  if (!animation) {
-    animation = "";
+  if (typeof aosOptionsOrAnimation === "string") {
+    return {
+      "data-aos": aosOptionsOrAnimation,
+    };
   }
 
-  props["data-aos"] = animation;
+  const { animation, ...opts } = aosOptionsOrAnimation;
+  const props: Record<string, string> = {};
+
+  props["data-aos"] = animation ?? "";
 
   const transformedProps = Object.keys(opts).reduce(
     (obj, curr) => {
