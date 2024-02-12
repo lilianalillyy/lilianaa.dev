@@ -17,10 +17,14 @@ import { loadBasic } from 'tsparticles-basic';
 export const FrontIndex = () => {
     useTitle();
 
-    const { aos } = useAos()
+    const { aos } = useAos({
+        once: true,
+    });
 
     const [choiceIsPowerCount, setChoiceIsPowerCount] = useState(0);
     const [choiceIsPower, setChoiceIsPower] = useState(false);
+
+    const [isDark, setIsDark] = useState(() =>  document.documentElement.classList.contains("dark"));
 
     const onNameClick = useCallback(() => {
         setChoiceIsPowerCount((prev) => {
@@ -40,21 +44,34 @@ export const FrontIndex = () => {
 
     return (
         <div>
+
             <div className={"container mx-auto px-10 pt-24 z-10 relative"}>
+                <button onClick={() => {
+                    document.documentElement.classList.toggle("dark");
+                    setIsDark(document.documentElement.classList.contains("dark"));
+                }} className={"py-4 border-red z-50 block"}>tog</button>
+
                 <div class={"flex flex-col gap-12 mb-12"}>
                     <div>
-                        <p class={"text-3xl font-thin tracking-wider text-gray-200"}>a.k.a Liliana</p>
-                        <h1 class={"text-7xl font-bold border-b-8 border-gray-100 w-fit pb-2 pr-12"} onClick={onNameClick}>Mia Pilchová</h1>
+                        <div className="overflow-hidden [--title-animation-delay:800ms]">
+                            <p class={"text-3xl font-thin tracking-wider text-gray-700 dark:text-gray-300 animate-title-up"}>a.k.a Liliana</p>
+                        </div>
+                        <div class={"overflow-hidden [--title-animation-delay:0ms]"}>
+                            <h1 className={"text-7xl font-bold w-fit pb-2 pr-12 animate-title-up before:animate-dash"} onClick={onNameClick}>Mia Pilchová</h1>
+                        </div>
                     </div>
-                    <div>
+                    <div className={"overflow-hidden"} {...aos({
+                        animation: "fade",
+                        delay: 1600
+                    })}>
                         <IntroSubtitle />
                     </div>
                 </div>
 
                 <div className={"pb-12"}>
-                    <div class={"grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 w-full gap-8 bg-gray-900"}>
+                    <div class={"grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 w-full gap-8 bg-gray-200 dark:bg-gray-900 transition-colors duration-500 ease-in-out"}>
                         <a href={`https://github.com/${github}`}>
-                            <Card className={"from-gray-700 via-violet-700 to-sky-700"}>
+                            <Card className={"from-gray-700 via-violet-700 to-sky-700"} fadeDelay={2000}>
                                 <CardHeader Icon={GitHubIcon} />
                                 <CardContent>
                                     <CardSocialText>@{github}</CardSocialText>
@@ -62,7 +79,7 @@ export const FrontIndex = () => {
                             </Card>
                         </a>
                         <a href={linkedInUrl} className={"lg:col-span-2 xl:col-span-1"}>
-                            <Card className={"from-sky-700 via-sky-500 to-slate-900"}>
+                            <Card className={"from-sky-700 via-sky-500 to-slate-900"} fadeDelay={2200}>
                                 <CardHeader Icon={LinkedInIcon} />
                                 <CardContent>
                                     <CardSocialText>{linkedInPartialUrl}</CardSocialText>
@@ -70,7 +87,7 @@ export const FrontIndex = () => {
                             </Card>
                         </a>
                         <a href={`mailto:${mail}`} className={"lg:col-span-2"}>
-                            <Card className={"from-amber-900 via-rose-900 to-amber-900"}>
+                            <Card className={"from-amber-900 via-rose-900 to-amber-900"} fadeDelay={2400}>
                                 <CardHeader Icon={AtIcon} />
                                 <CardContent>
                                     <CardSocialText>{mail}</CardSocialText>
@@ -78,14 +95,14 @@ export const FrontIndex = () => {
                             </Card>
                         </a>
                         <Link to="/catter">
-                            <Card className={"from-sky-700 via-indigo-500 to-indigo-950"}>
+                            <Card className={"from-sky-700 via-indigo-500 to-indigo-950"} fadeDelay={2600}>
                                 <CardHeader Icon={PawIcon} />
                                 <CardContent>
                                     <CardSocialText>catter</CardSocialText>
                                 </CardContent>
                             </Card>
                         </Link>
-                        <Card className={"from-purple-700 via-purple-800 to-purple-900 lg:col-span-3"} disableHover>
+                        <Card className={"from-purple-700 via-purple-800 to-purple-900 lg:col-span-3"} fadeDelay={2800} disableHover>
                             <CardHeader />
                             <CardContent>
                                 <CardSocialText>&copy; 2024 {fullName} &ndash; this website is open-source</CardSocialText>
@@ -98,7 +115,7 @@ export const FrontIndex = () => {
                     <p class={c("text-gray-600 lowercase tracking-wide", choiceIsPower && "aos-animate")} {...aos({ animation: "fade-up", anchorPlacement: "top-top", offset: -100 })}>Choice is an illusion created between those with power and those without.</p>
                 </div>
             </div>
-            <Particles options={dots} height="100vh" width="100vw" className="absolute inset-0" init={(e) => loadBasic(e, false)} />
-        </div>
+            <Particles options={dots(isDark ? "#f3f4f6" : "#1f2937")} height="100vh" width="100vw" className="absolute inset-0" init={(e) => loadBasic(e, false)} />
+        </div >
     )
 }

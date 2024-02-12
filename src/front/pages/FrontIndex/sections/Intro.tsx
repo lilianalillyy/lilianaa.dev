@@ -34,7 +34,7 @@ export const IntroSubtitle = () => {
 
     return (
         <>
-            <div class={"text-4xl font-extralight"} onClick={handleClick}>
+            <div class={"text-4xl font-extralight animate-title-up"} onClick={handleClick}>
                 <TextTransition inline direction={"down"}>
                     {text}
                 </TextTransition>
@@ -96,7 +96,7 @@ export const Intro = ({ onIntroBackgroundShown }: IntroProps) => {
                             </Link>
                         </div>
                     </div>
-                    <Particles options={dots} height="100vh" width="100vw" className="absolute inset-0" init={(e) => loadBasic(e, false)} />
+                    <Particles options={dots()} height="100vh" width="100vw" className="absolute inset-0" init={(e) => loadBasic(e, false)} />
                     <div className="w-full py-24 px-8 md:px-24 pb-24 z-10">
                         <h1
                             data-aos="fade-up"

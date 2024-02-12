@@ -69,7 +69,7 @@ export const CatterIndex = () => {
                 <CatView onClose={() => navigate("/catter")} catId={catId} />
             )}
 
-            <div className="w-screen min-h-screen bg-violet-600">
+            <div className="w-screen min-h-screen bg-gray-900">
                 <div className="container mx-auto px-8 py-12">
                     <h1 class="text-3xl tracking-wider font-medium font-mono text-white">
                         Catter &bull; <Link to="/">Liliana</Link>
