@@ -1,5 +1,5 @@
 // fixme
-export const dots: object = {
+export const dots = (color = "#fff"): object => ({
     fullScreen: {
         enable: false,
         zIndex: 0,
@@ -30,5 +30,6 @@ export const dots: object = {
         size: {
             value: { min: 1, max: 3 },
         },
+        color,
     },
-};
+});
