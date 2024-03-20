@@ -10,6 +10,7 @@
   "author": "Mia Vališová <valisova@lilianaa.dev>",
   "license": "MIT",
   "dependencies": {
+    "@fastify/basic-auth": "^5.1.1",
     "@fastify/caching": "^8.3.0",
     "@fastify/cors": "^8.4.1",
     "@fastify/oauth2": "^7.7.0",

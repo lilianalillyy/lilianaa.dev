@@ -6,6 +6,7 @@ const fastifySession = require("@fastify/secure-session");
 const { Liquid } = require("liquidjs");
 const { googleAuthClient } = require("./google");
 const { viewSpreadsheet } = require('./routes/viewSpreadsheet');
+const { viewPublicSheet } = require('./routes/viewPublicSheet');
 const { getUserInfo } = require('./routes/getUserInfo');
 const { PORT, TEMPLATES_DIR, SESSION_SECRET_PATH } = require('./constants');
 const { corsOrigin = "*", cookies, redis } = require('../config');
@@ -16,6 +17,7 @@ const { createRedis, createAbstractCache } = require('./cache');
 const AUTHENTICATED_ROUTES = [
     getUserInfo,
     viewSpreadsheet,
+    viewPublicSheet,
 ]
 
 const createServer = async () => {
