@@ -10,3 +10,14 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.before\:animate-dash {
+  position: relative;
+}
+
+.before\:animate-dash:before {
+  height: 8px;
+  position: absolute;
+  bottom: 0px;
+  @apply bg-current
+}
