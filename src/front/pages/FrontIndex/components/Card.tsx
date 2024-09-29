@@ -19,7 +19,16 @@ export const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & 
     }, [fadeDelay, setFaded]);
 
     return (
-        <div ref={ref} class={c("group/card h-64 w-full bg-gradient-to-br rounded-2xl shadow-2xl grid grid-rows-2 p-8 transition-all duration-500 ease-in-out-cubic", faded ? "opacity-80 dark:opcity-75" : "!opacity-0", !disableHover && "hover:opacity-100 hover:scale-90 hover:p-10", className)} {...props}>
+        <div 
+            ref={ref} 
+            class={c(
+                "group/card h-64 w-full bg-gradient-to-br rounded-2xl shadow-2xl grid grid-rows-2 p-8 transition-all duration-300 ease-in-out-cubic", 
+                faded ? "opacity-80 dark:opcity-75" : "!opacity-0", 
+                !disableHover && "hover:opacity-100 hover:scale-90 hover:p-10", 
+                className
+            )} 
+            {...props}
+        >
             {children}
         </div>
     );

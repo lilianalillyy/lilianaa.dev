@@ -6,5 +6,8 @@ import "@fontsource/manrope/200.css";
 
 import './assets/app.css';
 import 'aos/dist/aos.css';
+import { themeService } from './utils/theme.tsx';
+
+themeService.restoreThemeInDom();
 
 render(<ReactRoot />, document.getElementById('app')!)

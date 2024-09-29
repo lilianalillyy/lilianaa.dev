@@ -22,6 +22,6 @@ export const subtitles = [
     "Full-stack Developer",
     "Freelancer",
     "Open-Source Enthusiast",
-    "Likes to break stuff in free time",
+    "Stuff-breaker in free time",
     rayEasterEgg,
 ];
