@@ -13,6 +13,8 @@ import { Card, CardContent, CardHeader, CardSocialText } from './components/Card
 import { Particles } from '../../../components/ui/Particles';
 import { dots } from '../../../utils/particles';
 import { loadBasic } from 'tsparticles-basic';
+import { useTheme } from '../../../utils/theme';
+import { ThemeToggle } from '../../../components/icons/themeToggle';
 
 export const FrontIndex = () => {
     useTitle();
@@ -24,7 +26,7 @@ export const FrontIndex = () => {
     const [choiceIsPowerCount, setChoiceIsPowerCount] = useState(0);
     const [choiceIsPower, setChoiceIsPower] = useState(false);
 
-    const [isDark, setIsDark] = useState(() =>  document.documentElement.classList.contains("dark"));
+    const [theme] = useTheme();
 
     const onNameClick = useCallback(() => {
         setChoiceIsPowerCount((prev) => {
@@ -46,11 +48,6 @@ export const FrontIndex = () => {
         <div>
 
             <div className={"container mx-auto px-10 pt-24 z-10 relative"}>
-                <button onClick={() => {
-                    document.documentElement.classList.toggle("dark");
-                    setIsDark(document.documentElement.classList.contains("dark"));
-                }} className={"py-4 border-red z-50 block"}>tog</button>
-
                 <div class={"flex flex-col gap-12 mb-12"}>
                     <div>
                         <div className="overflow-hidden [--title-animation-delay:800ms]">
@@ -104,7 +101,8 @@ export const FrontIndex = () => {
                         </Link>
                         <Card className={"from-purple-700 via-purple-800 to-purple-900 lg:col-span-3"} fadeDelay={2800} disableHover>
                             <CardHeader />
-                            <CardContent>
+                            <CardContent className={"flex gap-4"}>
+                                <ThemeToggle/>
                                 <CardSocialText>&copy; 2024 {fullName} &ndash; this website is open-source</CardSocialText>
                             </CardContent>
                         </Card>
@@ -112,10 +110,21 @@ export const FrontIndex = () => {
                 </div>
 
                 <div>
-                    <p class={c("text-gray-600 lowercase tracking-wide", choiceIsPower && "aos-animate")} {...aos({ animation: "fade-up", anchorPlacement: "top-top", offset: -100 })}>Choice is an illusion created between those with power and those without.</p>
+                    <p 
+                        class={c("text-gray-600 lowercase tracking-wide", choiceIsPower && "aos-animate")} 
+                        {...aos({ animation: "fade-up", anchorPlacement: "top-top", offset: -100 })}
+                    >
+                        Choice is an illusion created between those with power and those without.
+                    </p>
                 </div>
             </div>
-            <Particles options={dots(isDark ? "#f3f4f6" : "#1f2937")} height="100vh" width="100vw" className="absolute inset-0" init={(e) => loadBasic(e, false)} />
+            <Particles 
+                options={dots(theme === "dark" ? "#f3f4f6" : "#1f2937")} 
+                height="100vh" 
+                width="100vw" 
+                className="absolute inset-0" 
+                init={(e) => loadBasic(e, false)} 
+            />
         </div >
     )
 }
