@@ -14,7 +14,7 @@ export const github = "lilianalillyy";
 
 export const mail = "pilchova@lilianaa.dev";
 
-export const rayEasterEgg = "🥯";
+export const rayEasterEgg = "🥖";
 
 export const rayCatTagId = 2;
 
