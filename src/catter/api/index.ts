@@ -1,7 +1,9 @@
 import qs from "qs";
 import { Cat, CatListResponse, CatViewResponse, RandomCatResponse, Tag, TagListResponse, TagType, TagViewResponse } from "./types";
 
-export const baseUrl = import.meta.env.DEV ? "http://localhost:16000" : "https://catter.liliana.digital";
+export const defaultBaseurl = import.meta.env.DEV ? "http://localhost:16000" : "https://catter.liliana.digital";
+
+export const baseUrl = import.meta.env.VITE_PUBLIC_CATTER_BASE_URL ?? defaultBaseurl;
 
 export const qsOptions: qs.IStringifyOptions = { arrayFormat: 'brackets', addQueryPrefix: true };
 
