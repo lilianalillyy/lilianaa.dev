@@ -7,7 +7,7 @@
     "start": "node ."
   },
   "keywords": [],
-  "author": "Mia Vališová <valisova@lilianaa.dev>",
+  "author": "Mia Pilchová <valisova@lilianaa.dev>",
   "license": "MIT",
   "dependencies": {
     "@fastify/basic-auth": "^5.1.1",
