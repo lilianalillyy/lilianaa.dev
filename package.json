@@ -1,7 +1,7 @@
 {
   "name": "@liliana/lilianaadev",
-  "author": "Mia Vališová <valisova@lilianaa.dev>",
-  "description": "Personal website made in Svelte. https://lilianaa.dev",
+  "author": "Mia Pilchová <pilchova@lilianaa.dev>",
+  "description": "Personal website made in Preact. https://lilianaa.dev",
   "private": true,
   "license": "UNLICENSED",
   "version": "1.0.0",
@@ -24,6 +24,7 @@
     "@headlessui/react": "^1.7.17",
     "aos": "3.0.0-beta.6",
     "change-case": "^5.4.2",
+    "framer-motion": "^11.5.4",
     "preact": "^10.16.0",
     "preact-intersection-observer": "^2.3.6",
     "qs": "^6.11.2",
