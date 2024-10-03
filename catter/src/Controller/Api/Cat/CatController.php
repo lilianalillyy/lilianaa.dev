@@ -27,6 +27,8 @@ class CatController extends ApiController
         $page = max($page, 1);
 
         $qb = $this->cats->createQueryBuilder('c')
+            ->andWhere('c.hidden = :hidden')
+            ->setParameter('hidden', false)
             ->setFirstResult(($page - 1) * self::MaxPerPage)
             ->setMaxResults(self::MaxPerPage)
             ->orderBy('c.date', 'DESC');
@@ -64,6 +66,8 @@ class CatController extends ApiController
     {
         $qb = $this->cats->createQueryBuilder('c')
             ->select($idOnly ? "c.id" : "c")
+            ->andWhere('c.hidden = :hidden')
+            ->setParameter('hidden', false)
             ->addOrderBy('RAND()')
             ->setMaxResults(1);
 
@@ -89,7 +93,7 @@ class CatController extends ApiController
     #[Route('/api/cat/{id}', name: 'app_api_cat_view')]
     public function view(int $id)
     {
-        if (!($cat = $this->cats->find($id))) {
+        if (!($cat = $this->cats->find($id)) || $cat->isHidden()) {
             return $this->error("Cat not found");
         }
 
