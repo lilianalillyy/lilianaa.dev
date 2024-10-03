@@ -169,19 +169,16 @@ class Cat
     public function toArray(): array
     {
         $catTags = $this->getCatTags()->toArray();
+        $content = $this->getContent() ?? implode(", ", array_map(fn(Tag $tag) => $tag->getContent(), $catTags));
 
         return [
             "id" => $this->getId(),
             "image_url" => $this->getImage() ? ("/cats/" . $this->getImage()) : "/404.jpg",
             "thumbnail_url" => $this->getThumbnail() ? ("/cats/" . $this->getThumbnail()) : null,
             "cat_tags" => array_map(fn(Tag $tag) => $tag->toArray(), $catTags),
-            "content" => $this->getContent(),
+            "content" => $content,
             "page_title" => 
-                substr(
-                    strip_tags(
-                        $content = ($this->getContent() ?? implode(", ", array_map(fn(Tag $tag) => $tag->getContent(), $catTags)))
-                    ), 0, 30
-                ) . strlen($content > 30 && $this->getContent() ? "..." : ""),
+                substr(strip_tags($content), 0, 30) . (strlen($content) > 30 ? "..." : ""),
             "date" => $this->getDate(),
             "camera_tag" => $this->getCameraTag()->toArray(),
             "tags" => array_map(fn(Tag $tag) => $tag->toArray(), $this->getTags()),
