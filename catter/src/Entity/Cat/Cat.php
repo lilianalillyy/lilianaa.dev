@@ -36,6 +36,9 @@ class Cat
     #[ORM\Column(nullable: true)]
     private ?string $content = null;
 
+    #[ORM\Column]
+    private bool $hidden = false;
+
     /**
      * @return Collection<int, Tag>
      */
@@ -111,7 +114,7 @@ class Cat
     }
 
     public function setImage(string $image): void
-    {;
+    {
         if ($this->image && $this->image !== $image) {
             $this->removeImageFile($image);
             $this->setThumbnail(null);
@@ -141,6 +144,14 @@ class Cat
     public function setContent(?string $content): void
     {
         $this->content = $content;
+    }
+
+    public function isHidden(): bool {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void {
+        $this->hidden = $hidden;
     }
 
     private function validateTagCollection(array|Collection $tags, TagType $type): void

@@ -8,6 +8,7 @@ use App\Entity\Tag\TagType;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -36,6 +37,7 @@ class CatCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('cat_[year]_[month]_[day]-[contenthash].[extension]'),
             TextEditorField::new('content'),
             DateTimeField::new('date'),
+            BooleanField::new('hidden'),
             AssociationField::new('tags')
                 ->hideOnIndex()
                 ->setQueryBuilder(
