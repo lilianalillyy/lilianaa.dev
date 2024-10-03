@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 
 class CatCrudController extends AbstractCrudController
 {
@@ -24,6 +25,12 @@ class CatCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Cat::class;
+    }
+
+    public function configureFilters(Filters $filters): Filters {
+        $filters->add('hidden');
+
+        return $filters;
     }
 
     public function configureFields(string $pageName): iterable
