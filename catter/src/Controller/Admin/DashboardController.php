@@ -43,7 +43,8 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Tags', 'fa fa-tag', Tag::class)
                 ->setBadge($tagCount = $this->tags->count([]), $tagCount < 1 ? 'dark' : 'info'),
             MenuItem::linkToCrud('Cats', 'fa fa-cat', Cat::class)
-                ->setBadge($catCount = $this->cats->count([]), $catCount < 1 ? 'dark' : 'info'),
+                ->setBadge($catCount = $this->cats->count([]), $catCount < 1 ? 'dark' : 'info')
+                ->setQueryParameter('filters[hidden]', 0),
             MenuItem::section('Users'),
             MenuItem::linkToCrud('Users', 'fa fa-user', User::class)
                 ->setBadge($userCount = $this->users->count([]), $userCount < 1 ? 'dark' : 'info'),
