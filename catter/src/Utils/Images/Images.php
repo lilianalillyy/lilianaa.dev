@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Utils;
+namespace App\Utils\Images;
 
 use Nette\Utils\Image;
 use Imagick;

@@ -3,7 +3,7 @@
 namespace App\Entity\Cat;
 
 use App\Entity\EntityServiceInterface;
-use App\Utils\Images;
+use App\Utils\Images\Images;
 use RuntimeException;
 
 /**

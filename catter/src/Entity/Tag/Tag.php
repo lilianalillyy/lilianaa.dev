@@ -22,6 +22,12 @@ class Tag
     #[ORM\Column(nullable: false)]
     private ?string $content = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $exifMake = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $exifModel = null;
+
     /**
      * @var Collection<int, Cat>
      */
@@ -60,6 +66,26 @@ class Tag
         $this->content = $content;
     }
 
+    public function getExifMake(): ?string 
+    {
+        return $this->exifMake;
+    }
+
+    public function setExifMake(?string $exifMake): void
+    {
+        $this->exifMake = $exifMake;
+    }
+
+    public function getExifModel(): ?string
+    {
+        return $this->exifModel;
+    }
+
+    public function setExifModel(?string $exifModel): void
+    {
+        $this->exifModel = $exifModel;
+    }
+
     public function getTaggedCats(): Collection
     {
         return $this->taggedCats;
@@ -77,10 +103,20 @@ class Tag
 
     public function toArray(): array
     {
+        $specificData = [];
+
+        if ($this->getType() === TagType::CameraTag) {
+            $specificData["exif"] = [
+                "make" => $this->getExifMake(),
+                "model" => $this->getExifModel(),
+            ];
+        }
+
         return [
             "id" => $this->getId(),
             "type" => $this->getType()->value,
-            "content" => $this->getContent()
+            "content" => $this->getContent(),
+            ...$specificData,
         ];
     }
 

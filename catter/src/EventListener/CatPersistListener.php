@@ -4,7 +4,7 @@ namespace App\EventListener;
 
 use App\Entity\Cat\Cat;
 use App\Entity\Cat\CatService;
-use App\Utils\Images;
+use App\Utils\Images\Images;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AbstractLifecycleEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;

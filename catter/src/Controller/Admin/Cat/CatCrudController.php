@@ -6,6 +6,10 @@ use App\Entity\Cat\Cat;
 use App\Entity\Cat\CatRepository;
 use App\Entity\Tag\TagType;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -67,4 +71,11 @@ class CatCrudController extends AbstractCrudController
         ];
     }
 
+    public function configureActions(Actions $actions): Actions {
+        return $actions;
+    }
+    
+    public function renderImport()
+    {
+    }
 }
