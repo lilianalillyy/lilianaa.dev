@@ -16,7 +16,8 @@ catter.liliana.digital:443 {
 
         handle_path /* {
                 root * /home/lilianaa.dev/catter/public
-                php_fastcgi unix//var/run/php/php8.2-fpm.sock {
+                php_fastcgi localhost:9000 {
+                        root /home/catter/public
                         index /index.php
                 }
                 try_files {path} /index.php

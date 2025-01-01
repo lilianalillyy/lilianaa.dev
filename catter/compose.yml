@@ -34,9 +34,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_PASSWORD}"
       MYSQL_DATABASE: "${MYSQL_NAME}"
-      MYSQL_TCP_PORT: "${MYSQL_PORT}"
     ports:
-      - "${MYSQL_PORT}:${MYSQL_PORT}"
+      - "${MYSQL_PORT}:3306"
 
 volumes:
   db-data:
