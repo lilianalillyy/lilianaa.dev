@@ -103,7 +103,7 @@ export const FrontIndex = () => {
                             <CardHeader />
                             <CardContent className={"flex gap-4"}>
                                 <ThemeToggle/>
-                                <CardSocialText>&copy; 2024 {fullName} &ndash; this website is open-source</CardSocialText>
+                                <CardSocialText>&copy; {new Date().getFullYear()} {fullName} &ndash; this website is open-source</CardSocialText>
                             </CardContent>
                         </Card>
                     </div>
