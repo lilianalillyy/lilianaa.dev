@@ -54,7 +54,7 @@ export const FrontIndex = () => {
                             <p class={"text-3xl font-thin tracking-wider text-gray-700 dark:text-gray-300 animate-title-up"}>a.k.a Liliana</p>
                         </div>
                         <div class={"overflow-hidden [--title-animation-delay:0ms]"}>
-                            <h1 className={"text-7xl font-bold w-fit pb-2 pr-12 animate-title-up before:animate-dash"} onClick={onNameClick}>Mia Pilchová</h1>
+                            <h1 className={"text-7xl font-bold w-fit pb-2 pr-12 animate-title-up before:animate-dash"} onClick={onNameClick}>Mia Runštuková (Pilchová)</h1>
                         </div>
                     </div>
                     <div className={"overflow-hidden"} {...aos({

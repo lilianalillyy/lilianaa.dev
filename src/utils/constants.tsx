@@ -6,7 +6,7 @@ export const nickname = "Liliana";
 
 export const firstName = "Mia";
 
-export const lastName = "Pilchová";
+export const lastName = "Runštuková (Pilchová)";
 
 export const fullName = `${firstName} ${lastName}`;
 
